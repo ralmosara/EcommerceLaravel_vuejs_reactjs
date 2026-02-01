@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@theme {
+  --color-punk-orange: #FF6B35;
+  --color-punk-coral: #FF8C42;
+  --color-punk-black: #1A1A1A;
+  --color-punk-dark: #0D0D0D;
+  --color-punk-gray: #2A2A2A;
+  --color-punk-light: #F5F5F5;
+
+  --font-family-display: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  --font-family-body: Inter, system-ui, sans-serif;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    @apply bg-punk-dark text-white;
+    font-family: var(--font-family-body);
+  }
+
+  ::selection {
+    @apply bg-punk-orange text-white;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .text-shadow-punk {
+    text-shadow: 2px 2px 0 #FF6B35, 4px 4px 0 rgba(0,0,0,0.3);
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
+
+  @keyframes glitch {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translate(-2px, 2px);
+    }
+    40% {
+      transform: translate(-2px, -2px);
+    }
+    60% {
+      transform: translate(2px, 2px);
+    }
+    80% {
+      transform: translate(2px, -2px);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
+
+  .hover-glitch:hover {
+    animation: glitch 0.3s ease-in-out;
+  }
+
+  .text-gradient-punk {
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .font-display {
+    font-family: var(--font-family-display);
+  }
+
+  .font-body {
+    font-family: var(--font-family-body);
+  }
+}
+
+@layer components {
+  .btn-punk {
+    @apply relative inline-flex items-center justify-center px-6 py-3 font-bold text-white uppercase tracking-wider;
+    @apply bg-punk-orange transition-all duration-200;
+    @apply border-2 border-transparent;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+  }
+
+  .btn-punk:hover {
+    @apply bg-punk-coral border-white;
+  }
+
+  .btn-punk-outline {
+    @apply relative inline-flex items-center justify-center px-6 py-3 font-bold uppercase tracking-wider;
+    @apply bg-transparent text-white border-2 border-white;
+    @apply transition-all duration-200;
+  }
+
+  .btn-punk-outline:hover {
+    @apply bg-white text-punk-black;
+  }
+
+  .card-punk {
+    @apply relative overflow-hidden bg-punk-gray;
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .card-punk:hover {
+    @apply transform -translate-y-1;
+    box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+  }
+
+  .vinyl-record {
+    @apply relative rounded-full;
+    background: radial-gradient(circle at center,
+      #1a1a1a 0%,
+      #1a1a1a 15%,
+      #FF6B35 15.5%,
+      #FF6B35 16%,
+      #1a1a1a 16.5%,
+      #2a2a2a 30%,
+      #1a1a1a 45%,
+      #2a2a2a 60%,
+      #1a1a1a 75%,
+      #2a2a2a 90%,
+      #1a1a1a 100%
+    );
+  }
+
+  .vinyl-record::before {
+    content: '';
+    @apply absolute inset-0 rounded-full;
+    background: repeating-radial-gradient(
+      circle at center,
+      transparent 0px,
+      transparent 2px,
+      rgba(255,255,255,0.03) 3px,
+      transparent 4px
+    );
+  }
+
+  .section-divider {
+    @apply w-full h-px;
+    background: linear-gradient(to right, transparent, #FF6B35, transparent);
+  }
+}
